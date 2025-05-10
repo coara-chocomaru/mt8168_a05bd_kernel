@@ -23,12 +23,19 @@ jobs:
        apt-get update
        apt-get install -y \
        debconf-utils
-      
+       
     - name: Preseed tzdata for Tokyo
       run: |
        echo "tzdata tzdata/Areas select Asia" | debconf-set-selections
        echo "tzdata tzdata/Zones/Asia select Tokyo" | debconf-set-selections
 
+    - name: tzdata
+      run: |
+       apt-get install -y tzdata \
+            --no-install-recommends \
+            -o Dpkg::Options::="--force-confdef" \
+            -o Dpkg::Options::="--force-confold"
+      
 
     - name: Set up APT packages
       run: |
