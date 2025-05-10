@@ -18,11 +18,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Preseed tzdata for Tokyo
+    - name: deconf
       run: |
        apt-get update
        apt-get install -y \
        debconf-utils
+      
+    - name: Preseed tzdata for Tokyo
+      run: |
        echo "tzdata tzdata/Areas select Asia" | debconf-set-selections
        echo "tzdata tzdata/Zones/Asia select Tokyo" | debconf-set-selections
 
