@@ -20,6 +20,9 @@ jobs:
       
     - name: Preseed tzdata for Tokyo
       run: |
+       apt-get update
+       apt-get install -y \
+       debconf-utils
        echo "tzdata tzdata/Areas select Asia" | debconf-set-selections
        echo "tzdata tzdata/Zones/Asia select Tokyo" | debconf-set-selections
 
